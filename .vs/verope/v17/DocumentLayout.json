@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "verope\\Form1.vb",
               "ToolTip": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\Form1.vb",
               "RelativeToolTip": "verope\\Form1.vb",
-              "ViewState": "AQIAABQAAAAAAAAAAAAQwCsAAAAQAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAuwCYAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2024-05-16T18:58:50.639Z",
               "IsPinned": true,
@@ -46,9 +46,10 @@
               "RelativeDocumentMoniker": "verope\\FileManager.vb",
               "ToolTip": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\FileManager.vb",
               "RelativeToolTip": "verope\\FileManager.vb",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2024-05-28T17:19:41.559Z"
+              "WhenOpened": "2024-05-28T17:19:41.559Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -59,7 +60,8 @@
               "ToolTip": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\Form1.vb [Dise\u00F1o]",
               "RelativeToolTip": "verope\\Form1.vb [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2024-05-16T18:56:17.542Z"
+              "WhenOpened": "2024-05-16T18:56:17.542Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }

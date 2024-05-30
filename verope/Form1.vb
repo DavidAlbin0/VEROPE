@@ -24,26 +24,48 @@ Public Class Form1
         <VBFixedString(5), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=5)> Public C5 As String
     End Structure
 
-    ' Función para formatear el valor como contabilidad (agrega $, punto como separador de miles y coma como separador decimal)
+    ' Aqui se le da formato xdxd
     Private Function FormatearComoContabilidad(valor As String) As String
-        ' Convertir el valor a decimal para formatearlo correctamente
-        Dim valorDecimal As Decimal
-        If Decimal.TryParse(valor, valorDecimal) Then
-            ' Formatear el valor con el formato de contabilidad deseado
-            Dim formato As String
-            If Math.Round(valorDecimal, 2) = Math.Floor(valorDecimal) Then
-                formato = "$##,##.#"
+        ' Verificar si el valor contiene un punto
+        Dim tienePunto As Boolean = valor.Contains(".")
+
+        ' Si el valor no tiene un punto, formatearlo como entero con formato de contabilidad
+        If Not tienePunto Then
+            ' Si el valor es un número válido, formatearlo
+            Dim valorDecimal As Decimal
+            If Decimal.TryParse(valor, valorDecimal) Then
+                ' Utilizar el formato con comas
+                Return "$ " & valorDecimal.ToString("#,#0").Replace(".", ",")
             Else
-                formato = "$##,##.#"
+                ' Si no se puede convertir a decimal, devolver el valor original
+                Return valor
             End If
-            Return valorDecimal.ToString(formato).Replace(".", "*").Replace(",", ".").Replace("*", ",")
         Else
-            ' Si no se puede convertir a decimal, devolver el valor original
-            Return valor
+
+            ' Si el valor tiene un punto, formatearlo con comas para separar miles a partir del tercer dígito antes del punto decimal
+            Dim partes As String() = valor.Split(".")
+            Dim parteEntera As String = partes(0)
+            Dim parteDecimal As String = partes(1)
+
+            ' Formatear la parte entera
+            Dim parteEnteraFormateada As String = ""
+            Dim contador As Integer = 0
+
+            For i As Integer = parteEntera.Length - 1 To 0 Step -1
+                If Char.IsDigit(parteEntera(i)) Then
+                    parteEnteraFormateada = parteEntera(i) & parteEnteraFormateada
+                    contador += 1
+                    If contador Mod 3 = 0 AndAlso i > 0 AndAlso Char.IsDigit(parteEntera(i - 1)) Then
+                        parteEnteraFormateada = "," & parteEnteraFormateada
+                    End If
+                Else
+                    parteEnteraFormateada = parteEntera(i) & parteEnteraFormateada
+                End If
+            Next
+
+            Return "$" & parteEnteraFormateada & "." & parteDecimal
         End If
     End Function
-
-
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -143,6 +165,8 @@ Public Class Form1
                 If Not row.IsNewRow Then
                     For columnIndex As Integer = 0 To dataGridView.Columns.Count - 1
                         Dim cellValue As String = If(row.Cells(columnIndex).Value IsNot Nothing, row.Cells(columnIndex).Value.ToString(), "")
+                        ' Remover los símbolos "$" y ","
+                        cellValue = cellValue.Replace("$", "").Replace(",", "")
                         columnLengths(columnIndex) = Math.Max(columnLengths(columnIndex), cellValue.Length)
                     Next
                 End If
@@ -153,6 +177,8 @@ Public Class Form1
                 If Not row.IsNewRow Then
                     For columnIndex As Integer = 0 To dataGridView.Columns.Count - 1
                         Dim cellValue As String = If(row.Cells(columnIndex).Value IsNot Nothing, row.Cells(columnIndex).Value.ToString(), "")
+                        ' Remover los símbolos "$" y ","
+                        cellValue = cellValue.Replace("$", "").Replace(",", "")
                         ' Alinear el valor a la derecha y rellenar con espacios en blanco para que tenga la longitud máxima de la columna
                         csvContent.Append(cellValue.PadRight(columnLengths(columnIndex)))
                         csvContent.Append(vbTab) ' Agregar un tabulador para separar las celdas (o cualquier otro carácter deseado)
@@ -172,7 +198,9 @@ Public Class Form1
             MessageBox.Show("Archivo guardado exitosamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
-    ' 
+
+
+
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
         ' Finalizar la edición en DataGridView1 y DataGridView2 para evitar el error
         DataGridView1.EndEdit()
@@ -407,17 +435,19 @@ Public Class Form1
             Next
         Next
     End Sub
-
-
     Private Sub BorrarSaldosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BorrarSaldosToolStripMenuItem.Click
         ' Itera a través de cada fila en el DataGridView
         For Each fila As DataGridViewRow In DataGridView2.Rows
-            ' Establece el valor de la columna 5 (indexada como 4 porque los índices comienzan en 0) a 0
-            fila.Cells(2).Value = "$ " & 0
+            ' Verifica si la celda está vacía
+            If fila.Cells(2).Value Is Nothing OrElse String.IsNullOrWhiteSpace(fila.Cells(2).Value.ToString()) Then
+                ' Si la celda está vacía, no hacer nada
+                Continue For
+            Else
+                ' Si la celda no está vacía, establecer el valor a "$ 0"
+                fila.Cells(2).Value = "$ 0"
+            End If
         Next
     End Sub
 
-    Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
 
-    End Sub
 End Class

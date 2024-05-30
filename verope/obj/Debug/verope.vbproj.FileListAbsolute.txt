@@ -1,0 +1,12 @@
+C:\Users\david.albino\source\repos\verope\verope\bin\Debug\verope.exe.config
+C:\Users\david.albino\source\repos\verope\verope\bin\Debug\verope.exe
+C:\Users\david.albino\source\repos\verope\verope\bin\Debug\verope.pdb
+C:\Users\david.albino\source\repos\verope\verope\bin\Debug\verope.xml
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.vbproj.AssemblyReference.cache
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.Form1.resources
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.Resources.resources
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.vbproj.GenerateResource.cache
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.vbproj.CoreCompileInputs.cache
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.exe
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.xml
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.pdb

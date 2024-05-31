@@ -450,4 +450,120 @@ Public Class Form1
     End Sub
 
 
+    Private Sub ConvertirRANDOMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConvertirRANDOMToolStripMenuItem.Click
+
+        Dim openFileDialog1 As New OpenFileDialog()
+
+        ' Configurar las propiedades del OpenFileDialog
+        openFileDialog1.InitialDirectory = "C:\" ' Carpeta inicial
+        openFileDialog1.Filter = "All files (*.*)|*.*" ' Permitir todos los tipos de archivo
+        openFileDialog1.FilterIndex = 1 ' Índice del filtro predeterminado
+        openFileDialog1.RestoreDirectory = True ' Restaurar el directorio actual si el usuario cambia el directorio
+
+        ' Mostrar el OpenFileDialog y verificar si el usuario seleccionó un archivo
+        If openFileDialog1.ShowDialog() = DialogResult.OK Then
+            ' Obtener la ruta del archivo seleccionado
+            Dim selectedFilePath As String = openFileDialog1.FileName
+
+            ' Determinar la estructura a utilizar basada en el nombre del archivo
+            If Path.GetFileName(selectedFilePath).ToUpper().Contains("CATMAY") Then
+                ' Cargar los datos en DataGridView1 usando CAT_MA
+
+                Try
+                    ConversorDeDatos(selectedFilePath, New CAT_MA(), Marshal.SizeOf(GetType(CAT_MA)), DataGridView2)
+                    MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+
+            ElseIf Path.GetFileName(selectedFilePath).ToUpper().Contains("CATAUX") Then
+
+                Try
+                    ' Cargar los datos en DataGridView1 usando CAT_AX
+                    ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
+                    MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            ElseIf Path.GetFileName(selectedFilePath).ToUpper().Contains("CATSUB") Then
+
+
+                Try
+                    ' Cargar los datos en DataGridView1 usando CAT_AX
+                    ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
+                    MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            ElseIf Path.GetFileName(selectedFilePath).ToUpper().Contains("SAC") Then
+
+
+                Try
+                    ' Cargar los datos en DataGridView1 usando CAT_AX
+                    ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
+                    MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            ElseIf Regex.IsMatch(Path.GetFileName(selectedFilePath), "^Poliza(\d+)$", RegexOptions.IgnoreCase) Then
+
+
+                Try
+                    ' Obtener el número de póliza del nombre del archivo
+                    Dim match As Match = Regex.Match(Path.GetFileName(selectedFilePath), "^Poliza(\d+)$", RegexOptions.IgnoreCase)
+                    Dim numeroPoliza As Integer = Integer.Parse(match.Groups(1).Value)
+                    ' Aquí puedes manejar el número de póliza de manera específica
+                    MessageBox.Show("Archivo de póliza detectado: " & numeroPoliza.ToString(), "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Implementa la lógica específica para los archivos de póliza según el número de póliza
+                Catch ex As Exception
+                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                End Try
+
+            Else
+                MessageBox.Show("Nombre de archivo no reconocido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+    End Sub
+
+    ' Método para cargar datos de archivos de acceso aleatorio en el DataGridView 1
+    Private Sub ConversorDeDatos(filePath As String, estructura As Object, longitudRegistro As Integer, dataGridView As DataGridView)
+        ' Limpiar las columnas y filas existentes en el DataGridView antes de cargar los archivos
+        dataGridView.Columns.Clear()
+        dataGridView.Rows.Clear()
+
+        Try
+            ' Definir las columnas basadas en la estructura
+            Dim campos = estructura.GetType().GetFields()
+            For Each campo In campos
+                dataGridView.Columns.Add(campo.Name, campo.Name)
+            Next
+
+            ' Leer registros del archivo de acceso aleatorio
+            Using fs As New FileStream(filePath, FileMode.Open, FileAccess.Read)
+                Dim numRegistros As Integer = fs.Length \ longitudRegistro
+                Dim buffer(longitudRegistro - 1) As Byte
+
+                For i As Integer = 0 To numRegistros - 1
+                    fs.Read(buffer, 0, longitudRegistro)
+
+                    ' Convertir el buffer a la estructura
+                    Dim handle As GCHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned)
+                    estructura = Marshal.PtrToStructure(handle.AddrOfPinnedObject(), estructura.GetType())
+                    handle.Free()
+
+                    ' Añadir los valores al DataGridView
+                    Dim valores As New List(Of String)
+                    For Each campo In campos
+                        valores.Add(campo.GetValue(estructura).ToString())
+                    Next
+                    dataGridView.Rows.Add(valores.ToArray())
+                Next
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error al leer el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+
 End Class

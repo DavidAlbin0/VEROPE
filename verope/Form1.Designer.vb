@@ -33,6 +33,7 @@ Partial Class Form1
         Me.ModificarDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CorrexionPolizasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CorregirOperacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConvertirRANDOMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.DirectorySearcher1 = New System.DirectoryServices.DirectorySearcher()
         Me.DirectorySearcher2 = New System.DirectoryServices.DirectorySearcher()
@@ -57,7 +58,6 @@ Partial Class Form1
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.PictureBox7 = New System.Windows.Forms.PictureBox()
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
-        Me.ConvertirRANDOMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -138,6 +138,12 @@ Partial Class Form1
         Me.CorregirOperacionesToolStripMenuItem.Name = "CorregirOperacionesToolStripMenuItem"
         Me.CorregirOperacionesToolStripMenuItem.Size = New System.Drawing.Size(233, 26)
         Me.CorregirOperacionesToolStripMenuItem.Text = "Corregir Operaciones"
+        '
+        'ConvertirRANDOMToolStripMenuItem
+        '
+        Me.ConvertirRANDOMToolStripMenuItem.Name = "ConvertirRANDOMToolStripMenuItem"
+        Me.ConvertirRANDOMToolStripMenuItem.Size = New System.Drawing.Size(88, 24)
+        Me.ConvertirRANDOMToolStripMenuItem.Text = "RANDOM"
         '
         'ProgressBar1
         '
@@ -338,12 +344,6 @@ Partial Class Form1
         Me.PictureBox8.Size = New System.Drawing.Size(63, 60)
         Me.PictureBox8.TabIndex = 17
         Me.PictureBox8.TabStop = False
-        '
-        'ConvertirRANDOMToolStripMenuItem
-        '
-        Me.ConvertirRANDOMToolStripMenuItem.Name = "ConvertirRANDOMToolStripMenuItem"
-        Me.ConvertirRANDOMToolStripMenuItem.Size = New System.Drawing.Size(152, 24)
-        Me.ConvertirRANDOMToolStripMenuItem.Text = "Convertir RANDOM"
         '
         'Form1
         '

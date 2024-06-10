@@ -2,6 +2,9 @@
 Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Text.RegularExpressions
+Imports System.Diagnostics
+Imports System.Runtime.InteropServices.ComTypes
+
 
 Public Class Form1
 
@@ -9,19 +12,311 @@ Public Class Form1
 
     ' Estructuras definidas para los RANDOM
     Structure CAT_MA
-        <VBFixedString(6), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=6)> Public B1 As String
-        <VBFixedString(32), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=32)> Public B2 As String
-        <VBFixedString(16), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=16)> Public B3 As String
-        <VBFixedString(5), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=5)> Public B4 As String
-        <VBFixedString(5), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=5)> Public B5 As String
+        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public B1 As String
+        <VBFixedString(32), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=32)> Public B2 As String
+        <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public B3 As String
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public B4 As String
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public B5 As String
+    End Structure
+    Structure Ope
+        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public CTA As String
+        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public reda As String
+        <VBFixedString(2), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=2)> Public fecha As String
+        <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public impo As String
+        <VBFixedString(1), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)> Public clav As String
+        <VBFixedString(9), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=9)> Public real As String
+    End Structure
+    Structure Otr
+        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public CTA As String
+        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public reda As String
+        <VBFixedString(2), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=2)> Public fecha As String
+        <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public impo As String
+        <VBFixedString(1), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)> Public clav As String
+        <VBFixedString(9), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=9)> Public real As String
+    End Structure
+    Structure DAT_OS
+        <VBFixedString(64), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=65)> Public D1 As String
+        <VBFixedString(60), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=60)> Public D2 As String
+        <VBFixedString(45), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=45)> Public D3 As String
+        <VBFixedString(15), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=15)> Public No_arch As String
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public a_o As String
+        <VBFixedString(25), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=25)> Public others1 As String
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public ultimaPol1 As String
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public ultimaOperacionReg As String
+        <VBFixedString(12), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=12)> Public others As String
+    End Structure
+    Structure Oper_aciones
+        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public CTA As String
+        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public descr As String
+        <VBFixedString(2), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=2)> Public fe As String
+        <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public impte As String
+        <VBFixedString(1), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)> Public indenti As String
+        <VBFixedString(9), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=9)> Public real As String
     End Structure
 
     Structure CAT_AX
-        <VBFixedString(6), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=6)> Public C1 As String
-        <VBFixedString(32), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=32)> Public C2 As String
-        <VBFixedString(16), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=16)> Public C3 As String
-        <VBFixedString(5), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=5)> Public C4 As String
-        <VBFixedString(5), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=5)> Public C5 As String
+        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public C1 As String
+        <VBFixedString(32), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=32)> Public C2 As String
+        <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public C3 As String
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public C4 As String
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public C5 As String
+    End Structure
+    Structure Per
+        <VBFixedString(20), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=20)> Public nom As String
+        <VBFixedString(20), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=20)> Public ape1 As String
+        <VBFixedString(20), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=20)> Public ape2 As String
+        <VBFixedString(18), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=18)> Public RFC As String
+        <VBFixedString(18), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=18)> Public imss As String
+        <VBFixedString(12), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=12)> Public fal As String
+        <VBFixedString(12), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=12)> Public fab As String
+        Public ingr As Long
+        Public viat As Long
+        Public otras As Long
+        Public integrado As Long
+    End Structure
+    Structure ContCat
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public g1 As String
+        <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public g2 As String
+        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public g3 As String
+    End Structure
+    Structure Basini
+        <VBFixedString(255), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=255)> Public datoArch As String
+    End Structure
+    Structure Fol_io
+        <VBFixedString(36), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=36)> Public fol As String
+    End Structure
+    Structure OtrasCh
+        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public CURP As String
+        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public otra As String
+        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public yotra As String
+        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public yporsi As String
+    End Structure
+    Structure Ct
+        Public Num As Integer
+        Public Num1 As Integer
+        Public Num2 As Integer
+        <VBFixedString(32), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=32)> Public Nom1 As String
+        <VBFixedString(32), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=32)> Public Nom2 As String
+        <VBFixedString(32), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=32)> Public Nom3 As String
+        Public Sdo As Double
+        Public Sdo1 As Double
+        Public Sdo2 As Double
+    End Structure
+    Structure Empresa
+        <VBFixedString(60), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=60)> Public name As String
+        Public añoEmpresa As Integer
+        Public sm As Integer
+        Public psub As Integer
+        <VBFixedString(14), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=14)> Public fecha As String
+    End Structure
+    Structure Tra_cta
+        Public num As Integer
+        <VBFixedString(32), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=32)> Public nombre As String
+        Public donde As Integer
+        Public incia As Integer
+        Public termina As Integer
+        <VBFixedString(1), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)> Public clave As String
+    End Structure
+
+    Structure Tra_Scta
+        Public num As Integer
+        <VBFixedString(32), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=32)> Public nombre As String
+        Public donde As Integer
+        Public refer As Integer
+        <VBFixedString(1), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)> Public clave As String
+    End Structure
+
+    Structure Sc
+        <VBFixedString(64), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=64)> Public guarda As String
+    End Structure
+    Structure Nis_cal
+        <VBFixedString(36), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=36)> Public folio As String
+        Public estado As Boolean
+    End Structure
+    Structure Clabnx
+        <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public Q1 As String
+    End Structure
+    Structure Nomco
+        <VBFixedString(50), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=50)> Public ArchImp As String
+        Public PSubDi As Long
+        Public subdio As Long
+        Public subapl As Long
+        Public subNap As Long
+        Public CreTot As Long
+        Public CredNe As Long
+        Public ImpTot As Long
+    End Structure
+    Structure Rg
+        Public De As Integer
+        Public A As Integer
+        Public Ubic As Integer
+    End Structure
+
+    Structure NominaQuincenal
+        Public dias As Long
+        Public hsnor As Long
+        Public hs_no As Long
+        Public hsdbl As Long
+        Public hs_db As Long
+        Public hstri As Long
+        Public hs_tr As Long
+        Public ispt As Long
+        Public crdsal As Long
+        Public imss As Long
+        Public sueldo As Long
+        Public hs_nor As Long
+        Public hs_dbl As Long
+        Public hs_tri As Long
+        Public viaticos As Long
+        Public pvac As Long
+        Public otras As Long
+        Public aguin As Long
+        Public ptu As Long
+        Public exentos As Long
+        Public prestamos As Long
+        Public fonacot As Long
+        Public telefono As Long
+        Public otraded As Long
+    End Structure
+    Structure NuevaNominaCompleta
+        <VBFixedString(50), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=50)> Public ArchImp As String
+        Public PSubDi As Long
+        Public subapl As Long
+        Public subNap As Long
+        Public Cretot As Long
+        Public CredNe As Long
+        Public ImpTOt As Long
+    End Structure
+
+    Structure NominaAnterior
+        Public inggrav As Long
+        Public imptoret As Long
+        Public credcal As Long
+        Public subapl As Long
+        Public subtotal As Long
+        Public subnoapl As Long
+    End Structure
+
+    Structure Ob
+        Public O_1 As Integer
+        Public por_1 As Integer
+        Public im_1 As Long
+        Public O_2 As Integer
+        Public por_2 As Integer
+        Public im_2 As Long
+        Public O_3 As Integer
+        Public por_3 As Integer
+        Public im_3 As Long
+        Public O_4 As Integer
+        Public por_4 As Integer
+        Public im_4 As Long
+        Public O_5 As Integer
+        Public por_5 As Integer
+        Public im_5 As Long
+        Public O_6 As Integer
+        Public por_6 As Integer
+        Public im_6 As Long
+        Public O_7 As Integer
+        Public por_7 As Integer
+        Public im_7 As Long
+        Public O_8 As Integer
+        Public por_8 As Integer
+        Public im_8 As Long
+        Public O_9 As Long
+        Public por_9 As Integer
+        Public im_9 As Long
+        Public O_10 As Integer
+        Public por_10 As Integer
+        Public im_10 As Long
+        Public O_11 As Integer
+        Public por_11 As Integer
+        Public im_11 As Long
+        Public O_12 As Integer
+        Public por_12 As Integer
+        Public im_12 As Long
+        Public O_13 As Integer
+        Public por_13 As Integer
+        Public im_13 As Long
+        Public O_14 As Integer
+        Public por_14 As Integer
+        Public im_14 As Long
+        Public O_15 As Integer
+        Public por_15 As Integer
+        Public im_15 As Long
+        Public O_16 As Integer
+        Public por_16 As Integer
+        Public im_16 As Long
+        Public O_17 As Integer
+        Public por_17 As Integer
+        Public im_17 As Long
+        Public O_18 As Integer
+        Public por_18 As Integer
+        Public im_18 As Long
+        Public O_19 As Integer
+        Public por_19 As Integer
+        Public im_19 As Long
+        Public O_20 As Integer
+        Public por_20 As Integer
+        Public im_20 As Long
+    End Structure
+    Structure Cheques
+        Public num As Integer
+        Public beneficiario As String
+        Public importe As Long
+        Public clave As String
+        Public numreal As Integer
+        Public refer As Integer
+        Public conta As Integer
+    End Structure
+    Structure Mvtos
+        Public Inc As Long
+        Public Ene As Long
+        Public Feb As Long
+        Public Mar As Long
+        Public Abr As Long
+        Public May As Long
+        Public Jun As Long
+        Public Jul As Long
+        Public Ago As Long
+        Public Sep As Long
+        Public Oct As Long
+        Public Nov As Long
+        Public Dic As Long
+    End Structure
+
+    Structure ultitmaOperacion
+        Public numeroOperacion As Long
+        Public ubicacionOperacion As Integer
+        Public renglonOperacion As Long
+        Public textoOperacion As String
+        Public poliza As Integer
+        Public impresionOperacion As Integer
+        Public tipoOperacion As Integer
+        Public redaccionOperacion As String
+    End Structure
+    Structure ult
+        Public num As Long
+        Public Ubi As Integer
+        Public renglon As Long
+        Public texto As String
+        Public poliza As Integer
+        Public Impresion As Integer
+        Public TipoCap As Integer
+        Public redaccion As String
+    End Structure
+    Structure Al
+        Public Cos As Integer
+        Public Rda As String
+        Public Imt As Long
+        Public Gto As Integer
+        Public Dep As Integer
+        Public Clt As Integer
+        Public Otr As Integer
+    End Structure
+    Structure Su
+        Public Parcial As Long
+        Public Debe As Long
+        Public Haber As Long
     End Structure
 
     ' Aqui se le da formato xdxd
@@ -73,7 +368,7 @@ Public Class Form1
         searchTimer.Interval = 500 ' 500 ms = 0.5 segundos
     End Sub
 
-    ' Método para cargar datos de archivos de acceso aleatorio en el DataGridView 1
+    ' Método para cargar datos de archivos CSV en el DataGridView
     Private Sub CargarDatosEnDataGridView(filePath As String, dataGridView As DataGridView)
         ' Limpiar las columnas existentes en el DataGridView antes de cargar los archivos
         dataGridView.Columns.Clear()
@@ -89,23 +384,30 @@ Public Class Form1
 
             ' Si hay al menos una línea en el archivo
             If lines.Length > 0 Then
-                ' Definir las columnas basadas en el número de campos esperados
-                For i As Integer = 1 To 5
+                ' Dividir la primera línea para obtener la cantidad de columnas
+                Dim firstLineFields As String() = lines(0).Split(","c)
+                Dim columnCount As Integer = firstLineFields.Length
+
+                ' Añadir las columnas al DataGridView con nombres B1, B2, B3, ...
+                For i As Integer = 1 To columnCount
                     dataGridView.Columns.Add($"B{i}", $"B{i}")
                 Next
 
-                ' Iterar sobre cada línea del archivo
-                For Each line As String In lines
-                    ' Dividir la línea en campos utilizando el tabulador como delimitador
-                    Dim fields As String() = line.Split(New Char() {vbTab}, StringSplitOptions.RemoveEmptyEntries)
+                ' Iterar sobre cada línea del archivo (comenzando desde la primera)
+                For i As Integer = 0 To lines.Length - 1
+                    Dim line As String = lines(i)
+                    ' Dividir la línea en campos utilizando la coma como delimitador
+                    Dim fields As String() = line.Split(","c)
 
                     ' Verificar que haya suficientes campos para llenar todas las columnas
-                    If fields.Length >= 5 Then
+                    If fields.Length >= columnCount Then
+                        ' Formatear el tercer campo como contabilidad si es un número
+                        fields(2) = FormatearComoContabilidad(fields(2))
                         ' Agregar una fila al DataGridView con los campos de esta línea
-                        dataGridView.Rows.Add(fields(0), fields(1), FormatearComoContabilidad(fields(2)), fields(3), fields(4))
+                        dataGridView.Rows.Add(fields)
                     Else
                         ' Si no hay suficientes campos, agregar celdas vacías
-                        Dim emptyFields As String() = {"", "", "", "", ""}
+                        Dim emptyFields As String() = New String(columnCount - 1) {}
                         dataGridView.Rows.Add(emptyFields)
                     End If
                 Next
@@ -124,7 +426,6 @@ Public Class Form1
             MessageBox.Show("Error al cargar los datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
 
     Private Sub dataGridView_RowPostPaint(sender As Object, e As DataGridViewRowPostPaintEventArgs)
         ' Dibujar el número de fila en el encabezado de fila
@@ -159,32 +460,18 @@ Public Class Form1
             Dim filePath As String = saveFileDialog1.FileName
             Dim csvContent As New StringBuilder()
 
-            ' Determinar la longitud máxima de cada columna
-            Dim columnLengths(dataGridView.Columns.Count - 1) As Integer
-            For Each row As DataGridViewRow In dataGridView.Rows
-                If Not row.IsNewRow Then
-                    For columnIndex As Integer = 0 To dataGridView.Columns.Count - 1
-                        Dim cellValue As String = If(row.Cells(columnIndex).Value IsNot Nothing, row.Cells(columnIndex).Value.ToString(), "")
-                        ' Remover los símbolos "$" y ","
-                        cellValue = cellValue.Replace("$", "").Replace(",", "")
-                        columnLengths(columnIndex) = Math.Max(columnLengths(columnIndex), cellValue.Length)
-                    Next
-                End If
-            Next
-
             ' Escribir las filas y columnas del DataGridView en el archivo CSV
             For Each row As DataGridViewRow In dataGridView.Rows
                 If Not row.IsNewRow Then
                     For columnIndex As Integer = 0 To dataGridView.Columns.Count - 1
                         Dim cellValue As String = If(row.Cells(columnIndex).Value IsNot Nothing, row.Cells(columnIndex).Value.ToString(), "")
-                        ' Remover los símbolos "$" y ","
+                        ' Remover los símbolos "$" y "," en caso de que existan
                         cellValue = cellValue.Replace("$", "").Replace(",", "")
-                        ' Alinear el valor a la derecha y rellenar con espacios en blanco para que tenga la longitud máxima de la columna
-                        csvContent.Append(cellValue.PadRight(columnLengths(columnIndex)))
-                        csvContent.Append(vbTab) ' Agregar un tabulador para separar las celdas (o cualquier otro carácter deseado)
+                        csvContent.Append(cellValue)
+                        If columnIndex < dataGridView.Columns.Count - 1 Then
+                            csvContent.Append(",")
+                        End If
                     Next
-
-                    ' Agregar un salto de línea al final de cada fila
                     csvContent.AppendLine()
                 End If
             Next
@@ -198,7 +485,6 @@ Public Class Form1
             MessageBox.Show("Archivo guardado exitosamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
-
 
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
@@ -397,28 +683,53 @@ Public Class Form1
             DrawHeader(DataGridView2, e.Graphics, headerRect)
 
             ' Dibujar las filas de la DataGridView
-            Dim bodyRect As New RectangleF(destinationRect.Left, destinationRect.Top + DataGridView2.ColumnHeadersHeight, destinationRect.Width, DataGridView2.RowTemplate.Height * rowsToPrint)
-            DrawRows(DataGridView2, e.Graphics, bodyRect, rowIndex, rowsToPrint)
+            Dim yPos As Single = destinationRect.Top + DataGridView2.ColumnHeadersHeight
+
+            For i As Integer = 0 To rowsToPrint - 1
+                Dim row As DataGridViewRow = DataGridView2.Rows(rowIndex + i)
+                Dim xPos As Single = destinationRect.Left
+                Dim rowHeight As Single = row.Height
+
+                For Each cell As DataGridViewCell In row.Cells
+                    Dim cellWidth As Single = DataGridView2.Columns(cell.ColumnIndex).Width
+                    Dim cellRect As New RectangleF(xPos, yPos, cellWidth, rowHeight)
+                    DrawCell(cell, e.Graphics, cellRect)
+                    xPos += cellWidth
+                Next
+
+                yPos += rowHeight
+            Next
 
             ' Indicar que hay más páginas si quedan filas por imprimir
             rowIndex += rowsToPrint
             If rowIndex < DataGridView2.Rows.Count Then
                 e.HasMorePages = True
                 currentPage += 1
+            Else
+                e.HasMorePages = False
+                currentPage = 0
             End If
         End If
     End Sub
 
-    Private Sub DrawHeader(dataGridView As DataGridView, graphics As Graphics, headerRect As RectangleF)
-        ' Calcular el ancho de cada columna para asegurar que quepan todas las columnas en la página
-        Dim columnWidth As Single = headerRect.Width / dataGridView.Columns.Count
-
+    Private Sub DrawHeader(dataGridView As DataGridView, graphics As Graphics, rect As RectangleF)
+        Dim xPos As Single = rect.Left
         For Each column As DataGridViewColumn In dataGridView.Columns
-            Dim cellRect As New RectangleF(headerRect.Left + column.DisplayIndex * columnWidth, headerRect.Top, columnWidth, headerRect.Height)
-            graphics.DrawString(column.HeaderText, dataGridView.ColumnHeadersDefaultCellStyle.Font, Brushes.Black, cellRect, New StringFormat() With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center})
-            graphics.DrawRectangle(Pens.Black, cellRect.Left, cellRect.Top, cellRect.Width, cellRect.Height)
+            Dim cellRect As New RectangleF(xPos, rect.Top, column.Width, rect.Height)
+            graphics.FillRectangle(Brushes.LightGray, cellRect)
+            graphics.DrawRectangle(Pens.Black, Rectangle.Round(cellRect))
+            graphics.DrawString(column.HeaderText, dataGridView.Font, Brushes.Black, cellRect)
+            xPos += column.Width
         Next
     End Sub
+
+    Private Sub DrawCell(cell As DataGridViewCell, graphics As Graphics, rect As RectangleF)
+        graphics.DrawRectangle(Pens.Black, Rectangle.Round(rect))
+        If cell.Value IsNot Nothing Then
+            graphics.DrawString(cell.Value.ToString(), cell.DataGridView.Font, Brushes.Black, rect)
+        End If
+    End Sub
+
 
     Private Sub DrawRows(dataGridView As DataGridView, graphics As Graphics, bodyRect As RectangleF, rowIndex As Integer, rowCount As Integer)
         ' Calcular el ancho de cada columna para asegurar que quepan todas las columnas en la página
@@ -451,7 +762,6 @@ Public Class Form1
 
 
     Private Sub ConvertirRANDOMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConvertirRANDOMToolStripMenuItem.Click
-
         Dim openFileDialog1 As New OpenFileDialog()
 
         ' Configurar las propiedades del OpenFileDialog
@@ -465,66 +775,33 @@ Public Class Form1
             ' Obtener la ruta del archivo seleccionado
             Dim selectedFilePath As String = openFileDialog1.FileName
 
-            ' Determinar la estructura a utilizar basada en el nombre del archivo
-            If Path.GetFileName(selectedFilePath).ToUpper().Contains("CATMAY") Then
-                ' Cargar los datos en DataGridView1 usando CAT_MA
-
-                Try
-                    ConversorDeDatos(selectedFilePath, New CAT_MA(), Marshal.SizeOf(GetType(CAT_MA)), DataGridView2)
-                    MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch ex As Exception
-                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-
-            ElseIf Path.GetFileName(selectedFilePath).ToUpper().Contains("CATAUX") Then
-
-                Try
-                    ' Cargar los datos en DataGridView1 usando CAT_AX
-                    ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
-                    MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch ex As Exception
-                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            ElseIf Path.GetFileName(selectedFilePath).ToUpper().Contains("CATSUB") Then
-
-
-                Try
-                    ' Cargar los datos en DataGridView1 usando CAT_AX
-                    ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
-                    MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch ex As Exception
-                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            ElseIf Path.GetFileName(selectedFilePath).ToUpper().Contains("SAC") Then
-
-
-                Try
-                    ' Cargar los datos en DataGridView1 usando CAT_AX
-                    ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
-                    MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch ex As Exception
-                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            ElseIf Regex.IsMatch(Path.GetFileName(selectedFilePath), "^Poliza(\d+)$", RegexOptions.IgnoreCase) Then
-
-
-                Try
-                    ' Obtener el número de póliza del nombre del archivo
-                    Dim match As Match = Regex.Match(Path.GetFileName(selectedFilePath), "^Poliza(\d+)$", RegexOptions.IgnoreCase)
-                    Dim numeroPoliza As Integer = Integer.Parse(match.Groups(1).Value)
-                    ' Aquí puedes manejar el número de póliza de manera específica
-                    MessageBox.Show("Archivo de póliza detectado: " & numeroPoliza.ToString(), "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    ' Implementa la lógica específica para los archivos de póliza según el número de póliza
-                Catch ex As Exception
-                    MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                End Try
-
-            Else
-                MessageBox.Show("Nombre de archivo no reconocido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            Try
+                ' Cargar los datos en DataGridView1 usando la función ConversorDeDatos
+                Dim fileName As String = Path.GetFileName(selectedFilePath)
+                Select Case True
+                    Case fileName.ToUpper().Contains("CAT")
+                        ConversorDeDatos(selectedFilePath, New CAT_MA(), Marshal.SizeOf(GetType(CAT_MA)), DataGridView2)
+                    Case fileName.ToUpper().Contains("DAT")
+                        ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
+                    Case fileName.ToUpper().Contains("SAC")
+                        ConversorDeDatos(selectedFilePath, New Oper_aciones(), Marshal.SizeOf(GetType(Oper_aciones)), DataGridView2)
+                    Case fileName.ToUpper().Contains("EP")
+                        ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
+                    Case fileName.ToUpper().Contains("DATOS")
+                        ConversorDeDatos(selectedFilePath, New DAT_OS(), Marshal.SizeOf(GetType(DAT_OS)), DataGridView2)
+                    Case Regex.IsMatch(fileName, "^Poliza(\d+)$", RegexOptions.IgnoreCase)
+                        ' Lógica específica para archivos de póliza
+                    Case Else
+                        MessageBox.Show("Nombre de archivo no reconocido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                End Select
+                MessageBox.Show("Archivo cargado correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show("Error al cargar el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
+
 
     ' Método para cargar datos de archivos de acceso aleatorio en el DataGridView 1
     Private Sub ConversorDeDatos(filePath As String, estructura As Object, longitudRegistro As Integer, dataGridView As DataGridView)
@@ -564,6 +841,9 @@ Public Class Form1
             MessageBox.Show("Error al leer el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
+    Private Sub CorrexionPolizasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrexionPolizasToolStripMenuItem.Click
+        Dim nuevoFormulario As New Polizas ' Cambia Form2 al nombre de tu formulario
+        nuevoFormulario.Show() ' Para mostrar el formulario de manera no modal
+    End Sub
 
 End Class

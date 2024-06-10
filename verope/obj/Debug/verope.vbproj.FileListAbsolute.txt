@@ -10,3 +10,4 @@ C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.vbproj.CoreCom
 C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.exe
 C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.xml
 C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.pdb
+C:\Users\david.albino\source\repos\verope\verope\obj\Debug\verope.Polizas.resources

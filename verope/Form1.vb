@@ -449,37 +449,44 @@ Public Class Form1
         e.Graphics.DrawString(rowIdx, grid.Font, SystemBrushes.ControlText, headerBounds, centerFormat)
     End Sub
 
-    ' Método para guardar los datos del DataGridView en un archivo CSV
-    Private Sub GuardarDataGridViewEnCSV(dataGridView As DataGridView)
+    ' Método para guardar los datos del DataGridView en un archivo XML
+    Private Sub GuardarDataGridViewEnXML(dataGridView As DataGridView)
         Dim saveFileDialog1 As New SaveFileDialog()
-        saveFileDialog1.Filter = "Archivos CSV (*.csv)|*.csv|Todos los archivos (*.*)|*.*"
+        saveFileDialog1.Filter = "Archivos XML (*.xml)|*.xml|Todos los archivos (*.*)|*.*"
         saveFileDialog1.FilterIndex = 1
         saveFileDialog1.RestoreDirectory = True
 
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
             Dim filePath As String = saveFileDialog1.FileName
-            Dim csvContent As New StringBuilder()
+            Dim dataSet As New DataSet("DataGridViewData")
+            Dim dataTable As New DataTable("Row")
 
-            ' Escribir las filas y columnas del DataGridView en el archivo CSV
+            ' Crear las columnas en el DataTable
+            For Each column As DataGridViewColumn In dataGridView.Columns
+                dataTable.Columns.Add(column.Name, GetType(String))
+            Next
+
+            ' Añadir las filas del DataGridView al DataTable
             For Each row As DataGridViewRow In dataGridView.Rows
                 If Not row.IsNewRow Then
+                    Dim dataRow As DataRow = dataTable.NewRow()
                     For columnIndex As Integer = 0 To dataGridView.Columns.Count - 1
-                        Dim cellValue As String = If(row.Cells(columnIndex).Value IsNot Nothing, row.Cells(columnIndex).Value.ToString(), "")
-                        ' Remover los símbolos "$" y "," en caso de que existan
-                        cellValue = cellValue.Replace("$", "").Replace(",", "")
-                        csvContent.Append(cellValue)
-                        If columnIndex < dataGridView.Columns.Count - 1 Then
-                            csvContent.Append(",")
+                        Dim cellValue As Object = row.Cells(columnIndex).Value
+                        If cellValue IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(cellValue.ToString()) Then
+                            dataRow(columnIndex) = cellValue.ToString()
+                        Else
+                            dataRow(columnIndex) = DBNull.Value
                         End If
                     Next
-                    csvContent.AppendLine()
+                    dataTable.Rows.Add(dataRow)
                 End If
             Next
 
-            ' Escribir el contenido al archivo utilizando la codificación UTF-8 sin BOM
-            Using sw As New StreamWriter(filePath, False, New UTF8Encoding(False))
-                sw.Write(csvContent.ToString())
-            End Using
+            ' Añadir el DataTable al DataSet
+            dataSet.Tables.Add(dataTable)
+
+            ' Guardar el DataSet en un archivo XML
+            dataSet.WriteXml(filePath, XmlWriteMode.WriteSchema)
 
             ' Informar al usuario que el archivo se guardó correctamente
             MessageBox.Show("Archivo guardado exitosamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -507,7 +514,7 @@ Public Class Form1
         ' Restaura la ubicación original de la imagen
         PictureBox5.Location = New Point(PictureBox5.Location.X - 2, PictureBox5.Location.Y - 2)
         ' Ejecuta el código para guardar el DataGridView en CSV
-        GuardarDataGridViewEnCSV(DataGridView2)
+        GuardarDataGridViewEnXML(DataGridView2)
     End Sub
 
 

@@ -4,7 +4,9 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Diagnostics
 Imports System.Runtime.InteropServices.ComTypes
-
+Imports System.Data
+Imports System.Windows.Forms
+Imports System.Xml
 
 Public Class Form1
 
@@ -319,7 +321,7 @@ Public Class Form1
         Public Haber As Long
     End Structure
 
-    ' Aqui se le da formato xdxd
+    ' Aqui se le da formato xdxdxd
     Private Function FormatearComoContabilidad(valor As String) As String
         ' Verificar si el valor contiene un punto
         Dim tienePunto As Boolean = valor.Contains(".")
@@ -368,7 +370,7 @@ Public Class Form1
         searchTimer.Interval = 500 ' 500 ms = 0.5 segundos
     End Sub
 
-    ' Método para cargar datos de archivos CSV en el DataGridView
+    ' Método para cargar datos desde un archivo XML en el DataGridView
     Private Sub CargarDatosEnDataGridView(filePath As String, dataGridView As DataGridView)
         ' Limpiar las columnas existentes en el DataGridView antes de cargar los archivos
         dataGridView.Columns.Clear()
@@ -379,37 +381,34 @@ Public Class Form1
         dataGridView.RowHeadersVisible = True
 
         Try
-            ' Leer todas las líneas del archivo
-            Dim lines As String() = File.ReadAllLines(filePath)
+            ' Crear un DataSet para almacenar los datos del archivo XML
+            Dim dataSet As New DataSet()
 
-            ' Si hay al menos una línea en el archivo
-            If lines.Length > 0 Then
-                ' Dividir la primera línea para obtener la cantidad de columnas
-                Dim firstLineFields As String() = lines(0).Split(","c)
-                Dim columnCount As Integer = firstLineFields.Length
+            ' Leer el archivo XML en el DataSet
+            dataSet.ReadXml(filePath)
 
-                ' Añadir las columnas al DataGridView con nombres B1, B2, B3, ...
-                For i As Integer = 1 To columnCount
-                    dataGridView.Columns.Add($"B{i}", $"B{i}")
+            ' Verificar si el DataSet contiene alguna tabla
+            If dataSet.Tables.Count > 0 Then
+                ' Obtener la primera tabla del DataSet
+                Dim dataTable As DataTable = dataSet.Tables(0)
+
+                ' Añadir las columnas al DataGridView
+                For Each column As DataColumn In dataTable.Columns
+                    dataGridView.Columns.Add(column.ColumnName, column.ColumnName)
                 Next
 
-                ' Iterar sobre cada línea del archivo (comenzando desde la primera)
-                For i As Integer = 0 To lines.Length - 1
-                    Dim line As String = lines(i)
-                    ' Dividir la línea en campos utilizando la coma como delimitador
-                    Dim fields As String() = line.Split(","c)
+                ' Añadir las filas al DataGridView
+                For Each row As DataRow In dataTable.Rows
+                    ' Convertir la fila en un array de objetos
+                    Dim rowValues As Object() = row.ItemArray
 
-                    ' Verificar que haya suficientes campos para llenar todas las columnas
-                    If fields.Length >= columnCount Then
-                        ' Formatear el tercer campo como contabilidad si es un número
-                        fields(2) = FormatearComoContabilidad(fields(2))
-                        ' Agregar una fila al DataGridView con los campos de esta línea
-                        dataGridView.Rows.Add(fields)
-                    Else
-                        ' Si no hay suficientes campos, agregar celdas vacías
-                        Dim emptyFields As String() = New String(columnCount - 1) {}
-                        dataGridView.Rows.Add(emptyFields)
+                    ' Verificar y formatear el tercer campo si es necesario
+                    If rowValues.Length > 2 Then
+                        rowValues(2) = FormatearComoContabilidad(rowValues(2).ToString())
                     End If
+
+                    ' Agregar la fila al DataGridView
+                    dataGridView.Rows.Add(rowValues)
                 Next
 
                 ' Ajustar el tamaño de las columnas para que se ajusten al contenido
@@ -418,14 +417,15 @@ Public Class Form1
                 ' Manejar el evento RowPostPaint para dibujar los números de fila
                 AddHandler dataGridView.RowPostPaint, AddressOf dataGridView_RowPostPaint
             Else
-                ' Si el archivo está vacío, mostrar un mensaje de advertencia
-                MessageBox.Show("El archivo está vacío.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                ' Si el archivo no contiene datos, mostrar un mensaje de advertencia
+                MessageBox.Show("El archivo no contiene datos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
 
         Catch ex As Exception
             MessageBox.Show("Error al cargar los datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
     Private Sub dataGridView_RowPostPaint(sender As Object, e As DataGridViewRowPostPaintEventArgs)
         ' Dibujar el número de fila en el encabezado de fila
@@ -473,7 +473,9 @@ Public Class Form1
                     For columnIndex As Integer = 0 To dataGridView.Columns.Count - 1
                         Dim cellValue As Object = row.Cells(columnIndex).Value
                         If cellValue IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(cellValue.ToString()) Then
-                            dataRow(columnIndex) = cellValue.ToString()
+                            ' Limpiar el valor de la celda para eliminar comas y símbolos de dólar
+                            Dim cleanedValue As String = cellValue.ToString().Replace(",", "").Replace("$", "").Trim()
+                            dataRow(columnIndex) = cleanedValue
                         Else
                             dataRow(columnIndex) = DBNull.Value
                         End If
@@ -492,7 +494,6 @@ Public Class Form1
             MessageBox.Show("Archivo guardado exitosamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
-
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
         ' Finalizar la edición en DataGridView1 y DataGridView2 para evitar el error
@@ -761,8 +762,6 @@ Public Class Form1
                 ' Si la celda está vacía, no hacer nada
                 Continue For
             Else
-                ' Si la celda no está vacía, establecer el valor a "$ 0"
-                fila.Cells(2).Value = "$ 0"
             End If
         Next
     End Sub

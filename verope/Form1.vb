@@ -29,7 +29,7 @@ Public Class Form1
         <VBFixedString(9), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=9)> Public real As String
     End Structure
     Structure Otr
-        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public CTA As String
+        <VBFixedString(7), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=7)> Public CTA As String
         <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public reda As String
         <VBFixedString(2), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=2)> Public fecha As String
         <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public impo As String
@@ -37,7 +37,7 @@ Public Class Form1
         <VBFixedString(9), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=9)> Public real As String
     End Structure
     Structure DAT_OS
-        <VBFixedString(64), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=65)> Public D1 As String
+        <VBFixedString(64), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=64)> Public D1 As String
         <VBFixedString(60), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=60)> Public D2 As String
         <VBFixedString(45), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=45)> Public D3 As String
         <VBFixedString(15), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=15)> Public No_arch As String
@@ -47,13 +47,13 @@ Public Class Form1
         <VBFixedString(5), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=5)> Public ultimaOperacionReg As String
         <VBFixedString(12), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=12)> Public others As String
     End Structure
-    Structure Oper_aciones
-        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public CTA As String
-        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public descr As String
-        <VBFixedString(2), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=2)> Public fe As String
-        <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public impte As String
-        <VBFixedString(1), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)> Public indenti As String
-        <VBFixedString(9), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=9)> Public real As String
+    Public Structure Oper_aciones
+        <VBFixedString(6), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=6)> Public CTA As String
+        <VBFixedString(30), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=30)> Public descr As String
+        <VBFixedString(2), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=2)> Public fe As String
+        <VBFixedString(16), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=16)> Public impte As String
+        <VBFixedString(2), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=2)> Public indenti As String
+        <VBFixedString(8), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=8)> Public real As String
     End Structure
 
     Structure CAT_AX
@@ -787,12 +787,16 @@ Public Class Form1
                 Select Case True
                     Case fileName.ToUpper().Contains("CAT")
                         ConversorDeDatos(selectedFilePath, New CAT_MA(), Marshal.SizeOf(GetType(CAT_MA)), DataGridView2)
-                    Case fileName.ToUpper().Contains("DAT")
+                    Case fileName.ToUpper().Contains("SAT")
                         ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
                     Case fileName.ToUpper().Contains("SAC")
                         ConversorDeDatos(selectedFilePath, New Oper_aciones(), Marshal.SizeOf(GetType(Oper_aciones)), DataGridView2)
-                    Case fileName.ToUpper().Contains("EP")
-                        ConversorDeDatos(selectedFilePath, New CAT_AX(), Marshal.SizeOf(GetType(CAT_AX)), DataGridView2)
+                    Case fileName.ToUpper().Contains("COR")
+                        ConversorDeDatos(selectedFilePath, New Oper_aciones(), Marshal.SizeOf(GetType(Oper_aciones)), DataGridView2)
+                    Case fileName.ToUpper().Contains("HABER")
+                        ConversorDeDatos(selectedFilePath, New Oper_aciones(), Marshal.SizeOf(GetType(Oper_aciones)), DataGridView2)
+                    Case fileName.ToUpper().Contains("CHEQ")
+                        ConversorDeDatos(selectedFilePath, New Cheques(), Marshal.SizeOf(GetType(Cheques)), DataGridView2)
                     Case fileName.ToUpper().Contains("DATOS")
                         ConversorDeDatos(selectedFilePath, New DAT_OS(), Marshal.SizeOf(GetType(DAT_OS)), DataGridView2)
                     Case Regex.IsMatch(fileName, "^Poliza(\d+)$", RegexOptions.IgnoreCase)

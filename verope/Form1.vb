@@ -820,6 +820,41 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub DataGridView2_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView2.KeyDown
+        If e.Control AndAlso e.KeyCode = Keys.V Then
+            Try
+                Dim startingRow As Integer = DataGridView2.CurrentCell.RowIndex
+                Dim startingColumn As Integer = DataGridView2.CurrentCell.ColumnIndex
+
+                Dim pasteText As String = Clipboard.GetText()
+                Dim pasteRows() As String = pasteText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+
+                ' Obtener el número de filas y columnas para pegar
+                Dim numRowsToPaste As Integer = pasteRows.Length
+                Dim numColumnsToPaste As Integer = If(numRowsToPaste > 0, pasteRows(0).Split(vbTab).Length, 0)
+
+                ' Agregar nuevas filas si es necesario
+                If startingRow + numRowsToPaste > DataGridView2.Rows.Count Then
+                    DataGridView2.Rows.Add(startingRow + numRowsToPaste - DataGridView2.Rows.Count)
+                End If
+
+                For i As Integer = 0 To numRowsToPaste - 1
+                    Dim rowData() As String = pasteRows(i).Split(New String() {vbTab}, StringSplitOptions.None)
+                    For j As Integer = 0 To Math.Min(rowData.Length - 1, numColumnsToPaste - 1)
+                        If startingRow + i < DataGridView2.RowCount AndAlso startingColumn + j < DataGridView2.ColumnCount Then
+                            DataGridView2.Rows(startingRow + i).Cells(startingColumn + j).Value = rowData(j)
+                        End If
+                    Next
+                Next
+            Catch ex As Exception
+                MessageBox.Show("Error al pegar los datos desde el portapapeles: " & ex.Message)
+            End Try
+
+            e.Handled = True
+        End If
+    End Sub
+
+
 
     ' Método para cargar datos de archivos de acceso aleatorio en el DataGridView 1
     Private Sub ConversorDeDatos(filePath As String, estructura As Object, longitudRegistro As Integer, dataGridView As DataGridView)
@@ -865,5 +900,6 @@ Public Class Form1
         Dim nuevoFormulario As New Polizas ' Cambia Form2 al nombre de tu formulario
         nuevoFormulario.Show() ' Para mostrar el formulario de manera no modal
     End Sub
+
 
 End Class

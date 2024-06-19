@@ -1,6 +1,12 @@
 ﻿Imports System.IO
+Imports System.Runtime.InteropServices
+Imports System.Text
+Imports System.Text.RegularExpressions
+Imports System.Diagnostics
+Imports System.Runtime.InteropServices.ComTypes
+Imports System.Data
 Imports System.Windows.Forms
-
+Imports System.Xml
 Public Class Polizas
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
         ' Aquí puedes manejar los eventos de clic en las celdas si es necesario
@@ -283,4 +289,104 @@ Public Class Polizas
         End If
     End Sub
 
+    Private Sub DrawHeader(dataGridView As DataGridView, graphics As Graphics, rect As RectangleF)
+        Dim xPos As Single = rect.Left
+        For Each column As DataGridViewColumn In dataGridView.Columns
+            Dim cellRect As New RectangleF(xPos, rect.Top, column.Width, rect.Height)
+            graphics.FillRectangle(Brushes.LightGray, cellRect)
+            graphics.DrawRectangle(Pens.Black, Rectangle.Round(cellRect))
+            graphics.DrawString(column.HeaderText, dataGridView.Font, Brushes.Black, cellRect)
+            xPos += column.Width
+        Next
+    End Sub
+
+    Private Sub DrawCell(cell As DataGridViewCell, graphics As Graphics, rect As RectangleF)
+        graphics.DrawRectangle(Pens.Black, Rectangle.Round(rect))
+        If cell.Value IsNot Nothing Then
+            graphics.DrawString(cell.Value.ToString(), cell.DataGridView.Font, Brushes.Black, rect)
+        End If
+    End Sub
+
+
+    Private Sub DrawRows(dataGridView As DataGridView, graphics As Graphics, bodyRect As RectangleF, rowIndex As Integer, rowCount As Integer)
+        ' Calcular el ancho de cada columna para asegurar que quepan todas las columnas en la página
+        Dim columnWidth As Single = bodyRect.Width / dataGridView.Columns.Count
+
+        For i As Integer = 0 To rowCount - 1
+            Dim currentRow As DataGridViewRow = dataGridView.Rows(rowIndex + i)
+            Dim rowRect As New RectangleF(bodyRect.Left, bodyRect.Top + i * dataGridView.RowTemplate.Height, bodyRect.Width, dataGridView.RowTemplate.Height)
+
+            For Each cell As DataGridViewCell In currentRow.Cells
+                Dim cellRect As New RectangleF(rowRect.Left + cell.ColumnIndex * columnWidth, rowRect.Top, columnWidth, rowRect.Height)
+                graphics.DrawString(cell.FormattedValue.ToString(), dataGridView.DefaultCellStyle.Font, Brushes.Black, cellRect, New StringFormat() With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center})
+                graphics.DrawRectangle(Pens.Black, cellRect.Left, cellRect.Top, cellRect.Width, cellRect.Height)
+            Next
+        Next
+    End Sub
+    Private currentPage As Integer = 0
+
+    Private Sub PrintDocument_PrintPage(sender As Object, e As Printing.PrintPageEventArgs)
+        ' Definir el área de impresión
+        Dim printArea As RectangleF = e.PageSettings.PrintableArea
+        Dim printWidth As Single = printArea.Width
+        Dim printHeight As Single = printArea.Height
+
+        ' Definir el rectángulo de destino para dibujar el contenido de la DataGridView
+        Dim destinationRect As New RectangleF(printArea.Left, printArea.Top, printWidth, printHeight)
+
+        ' Dibujar el contenido de la DataGridView en la página
+        Dim rowsPerPage As Integer = CInt(Math.Floor(printHeight / DataGridView1.RowTemplate.Height))
+        Dim rowIndex As Integer = currentPage * rowsPerPage
+        Dim rowsToPrint As Integer = Math.Min(rowsPerPage, DataGridView1.Rows.Count - rowIndex)
+
+        If rowsToPrint > 0 Then
+            ' Dibujar el encabezado de la DataGridView
+            Dim headerRect As New RectangleF(destinationRect.Left, destinationRect.Top, destinationRect.Width, DataGridView1.ColumnHeadersHeight)
+            DrawHeader(DataGridView1, e.Graphics, headerRect)
+
+            ' Dibujar las filas de la DataGridView
+            Dim yPos As Single = destinationRect.Top + DataGridView1.ColumnHeadersHeight
+
+            For i As Integer = 0 To rowsToPrint - 1
+                Dim row As DataGridViewRow = DataGridView1.Rows(rowIndex + i)
+                Dim xPos As Single = destinationRect.Left
+                Dim rowHeight As Single = row.Height
+
+                For Each cell As DataGridViewCell In row.Cells
+                    Dim cellWidth As Single = DataGridView1.Columns(cell.ColumnIndex).Width
+                    Dim cellRect As New RectangleF(xPos, yPos, cellWidth, rowHeight)
+                    DrawCell(cell, e.Graphics, cellRect)
+                    xPos += cellWidth
+                Next
+
+                yPos += rowHeight
+            Next
+
+            ' Indicar que hay más páginas si quedan filas por imprimir
+            rowIndex += rowsToPrint
+            If rowIndex < DataGridView1.Rows.Count Then
+                e.HasMorePages = True
+                currentPage += 1
+            Else
+                e.HasMorePages = False
+                currentPage = 0
+            End If
+        End If
+    End Sub
+
+    Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
+        ' Crear un objeto PrintDocument
+        Dim printDocument As New Printing.PrintDocument()
+
+        ' Asignar el control DataGridView2 al PrintDocument para que se imprima
+        AddHandler printDocument.PrintPage, AddressOf PrintDocument_PrintPage
+
+        ' Mostrar el cuadro de diálogo de impresión
+        Dim printDialog As New PrintDialog()
+        printDialog.Document = printDocument
+        If printDialog.ShowDialog() = DialogResult.OK Then
+            currentPage = 0 ' Restablecer el contador de páginas
+            printDocument.Print()
+        End If
+    End Sub
 End Class

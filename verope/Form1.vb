@@ -797,6 +797,14 @@ Public Class Form1
                         ConversorDeDatos(selectedFilePath, New Oper_aciones(), Marshal.SizeOf(GetType(Oper_aciones)), DataGridView2)
                     Case fileName.ToUpper().Contains("CHEQ")
                         ConversorDeDatos(selectedFilePath, New Cheques(), Marshal.SizeOf(GetType(Cheques)), DataGridView2)
+                    Case fileName.ToUpper().Contains("PER")
+                        ConversorDeDatos(selectedFilePath, New Per(), Marshal.SizeOf(GetType(Per)), DataGridView2)
+                    Case fileName.ToUpper().Contains("OtrasCh")
+                        ConversorDeDatos(selectedFilePath, New OtrasCh(), Marshal.SizeOf(GetType(OtrasCh)), DataGridView2)
+                    Case fileName.ToUpper().Contains("ContCat")
+                        ConversorDeDatos(selectedFilePath, New ContCat(), Marshal.SizeOf(GetType(ContCat)), DataGridView2)
+                    Case fileName.ToUpper().Contains("CAT")
+                        ConversorDeDatos(selectedFilePath, New CAT_MA(), Marshal.SizeOf(GetType(CAT_MA)), DataGridView2)
                     Case fileName.ToUpper().Contains("DATOS")
                         ConversorDeDatos(selectedFilePath, New DAT_OS(), Marshal.SizeOf(GetType(DAT_OS)), DataGridView2)
                     Case Regex.IsMatch(fileName, "^Poliza(\d+)$", RegexOptions.IgnoreCase)
@@ -851,6 +859,8 @@ Public Class Form1
             MessageBox.Show("Error al leer el archivo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
     Private Sub CorrexionPolizasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrexionPolizasToolStripMenuItem.Click
         Dim nuevoFormulario As New Polizas ' Cambia Form2 al nombre de tu formulario
         nuevoFormulario.Show() ' Para mostrar el formulario de manera no modal

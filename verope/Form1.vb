@@ -896,9 +896,47 @@ Public Class Form1
     End Sub
 
 
-    Private Sub CorrexionPolizasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrexionPolizasToolStripMenuItem.Click
-        Dim nuevoFormulario As New Polizas ' Cambia Form2 al nombre de tu formulario
-        nuevoFormulario.Show() ' Para mostrar el formulario de manera no modal
+
+    Private searchText As String = "" ' Texto de búsqueda
+        Private currentIndex As Integer = -1 ' Índice de fila actual durante la búsqueda
+        Private results As List(Of DataGridViewCell) = New List(Of DataGridViewCell)() ' Lista de celdas encontradas
+
+        ' Evento que se dispara cuando se hace clic en el botón de búsqueda
+        Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+            searchText = TextBox1.Text.ToLower() ' Obtener el texto de búsqueda
+            results.Clear() ' Limpiar resultados anteriores
+            currentIndex = -1 ' Reiniciar índice de fila actual
+
+            For Each row As DataGridViewRow In DataGridView2.Rows
+                For Each cell As DataGridViewCell In row.Cells
+                    If cell.Value IsNot Nothing AndAlso cell.Value.ToString().ToLower().Contains(searchText) Then
+                        results.Add(cell) ' Agregar celda encontrada a la lista de resultados
+                    End If
+                Next
+            Next
+
+            If results.Count > 0 Then
+                currentIndex = 0 ' Establecer el índice en el primer resultado encontrado
+                HighlightResult()
+            Else
+                MessageBox.Show("No se encontraron resultados.")
+            End If
+        End Sub
+
+        ' Evento que se dispara cuando se hace clic en el botón de siguiente
+        Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+            If currentIndex >= 0 AndAlso currentIndex < results.Count - 1 Then
+                currentIndex += 1 ' Avanzar al siguiente resultado
+                HighlightResult()
+            Else
+                MessageBox.Show("No hay más resultados para mostrar.")
+            End If
+        End Sub
+
+    ' Resaltar el resultado actual en la DataGridView
+    Private Sub HighlightResult()
+        DataGridView2.CurrentCell = results(currentIndex)
+        DataGridView2.CurrentCell.Selected = True
     End Sub
 
 

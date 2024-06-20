@@ -49,7 +49,6 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -58,6 +57,9 @@ Partial Class Form1
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.PictureBox7 = New System.Windows.Forms.PictureBox()
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.MenuStrip2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,13 +94,13 @@ Partial Class Form1
         'OrigenToolStripMenuItem
         '
         Me.OrigenToolStripMenuItem.Name = "OrigenToolStripMenuItem"
-        Me.OrigenToolStripMenuItem.Size = New System.Drawing.Size(143, 26)
+        Me.OrigenToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.OrigenToolStripMenuItem.Text = "Origen"
         '
         'DestinoToolStripMenuItem
         '
         Me.DestinoToolStripMenuItem.Name = "DestinoToolStripMenuItem"
-        Me.DestinoToolStripMenuItem.Size = New System.Drawing.Size(143, 26)
+        Me.DestinoToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.DestinoToolStripMenuItem.Text = "Destino"
         '
         'BorrarSaldosToolStripMenuItem
@@ -117,13 +119,13 @@ Partial Class Form1
         'DepositosToolStripMenuItem
         '
         Me.DepositosToolStripMenuItem.Name = "DepositosToolStripMenuItem"
-        Me.DepositosToolStripMenuItem.Size = New System.Drawing.Size(199, 26)
+        Me.DepositosToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.DepositosToolStripMenuItem.Text = "Depositos"
         '
         'ModificarDatosToolStripMenuItem
         '
         Me.ModificarDatosToolStripMenuItem.Name = "ModificarDatosToolStripMenuItem"
-        Me.ModificarDatosToolStripMenuItem.Size = New System.Drawing.Size(199, 26)
+        Me.ModificarDatosToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.ModificarDatosToolStripMenuItem.Text = "Modificar Datos"
         '
         'CorrexionPolizasToolStripMenuItem
@@ -258,18 +260,11 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.Width = 70
         '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(1169, 46)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(268, 22)
-        Me.DateTimePicker1.TabIndex = 9
-        '
         'PictureBox2
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox2.BackgroundImage = Global.verope.My.Resources.Resources.copiars_25x251
-        Me.PictureBox2.Location = New System.Drawing.Point(1615, 75)
+        Me.PictureBox2.Location = New System.Drawing.Point(959, 75)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(33, 31)
         Me.PictureBox2.TabIndex = 10
@@ -279,7 +274,7 @@ Partial Class Form1
         '
         Me.PictureBox3.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox3.BackgroundImage = Global.verope.My.Resources.Resources.Borrar_25x25
-        Me.PictureBox3.Location = New System.Drawing.Point(755, 75)
+        Me.PictureBox3.Location = New System.Drawing.Point(57, 75)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(31, 31)
         Me.PictureBox3.TabIndex = 11
@@ -289,7 +284,7 @@ Partial Class Form1
         '
         Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox4.BackgroundImage = Global.verope.My.Resources.Resources.Borrar_25x25
-        Me.PictureBox4.Location = New System.Drawing.Point(1578, 75)
+        Me.PictureBox4.Location = New System.Drawing.Point(922, 75)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(31, 31)
         Me.PictureBox4.TabIndex = 12
@@ -299,7 +294,7 @@ Partial Class Form1
         '
         Me.PictureBox5.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox5.BackgroundImage = Global.verope.My.Resources.Resources.guardar_25x25
-        Me.PictureBox5.Location = New System.Drawing.Point(1541, 75)
+        Me.PictureBox5.Location = New System.Drawing.Point(885, 75)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(31, 31)
         Me.PictureBox5.TabIndex = 13
@@ -309,7 +304,7 @@ Partial Class Form1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.BackgroundImage = Global.verope.My.Resources.Resources.copiars_25x25
-        Me.PictureBox1.Location = New System.Drawing.Point(790, 75)
+        Me.PictureBox1.Location = New System.Drawing.Point(92, 75)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(33, 31)
         Me.PictureBox1.TabIndex = 14
@@ -319,7 +314,7 @@ Partial Class Form1
         '
         Me.PictureBox6.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox6.BackgroundImage = Global.verope.My.Resources.Resources.subirarechivo_25x25
-        Me.PictureBox6.Location = New System.Drawing.Point(718, 75)
+        Me.PictureBox6.Location = New System.Drawing.Point(20, 75)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(31, 31)
         Me.PictureBox6.TabIndex = 15
@@ -329,7 +324,7 @@ Partial Class Form1
         '
         Me.PictureBox7.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox7.BackgroundImage = Global.verope.My.Resources.Resources.subirarechivo_25x25
-        Me.PictureBox7.Location = New System.Drawing.Point(1504, 75)
+        Me.PictureBox7.Location = New System.Drawing.Point(848, 75)
         Me.PictureBox7.Name = "PictureBox7"
         Me.PictureBox7.Size = New System.Drawing.Size(31, 31)
         Me.PictureBox7.TabIndex = 16
@@ -339,11 +334,40 @@ Partial Class Form1
         '
         Me.PictureBox8.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox8.BackgroundImage = Global.verope.My.Resources.Resources.impresora_50X50
-        Me.PictureBox8.Location = New System.Drawing.Point(18, 46)
+        Me.PictureBox8.Location = New System.Drawing.Point(1590, 46)
         Me.PictureBox8.Name = "PictureBox8"
         Me.PictureBox8.Size = New System.Drawing.Size(63, 60)
         Me.PictureBox8.TabIndex = 17
         Me.PictureBox8.TabStop = False
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(1009, 84)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(471, 22)
+        Me.TextBox1.TabIndex = 18
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Button1.Location = New System.Drawing.Point(1486, 84)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 19
+        Me.Button1.Text = "Buscar"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.SystemColors.InactiveBorder
+        Me.Button2.Location = New System.Drawing.Point(1486, 55)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 20
+        Me.Button2.Text = "Siguiente"
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Form1
         '
@@ -352,6 +376,9 @@ Partial Class Form1
         Me.BackColor = System.Drawing.SystemColors.Menu
         Me.BackgroundImage = Global.verope.My.Resources.Resources.llp
         Me.ClientSize = New System.Drawing.Size(1673, 902)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.PictureBox8)
         Me.Controls.Add(Me.PictureBox7)
         Me.Controls.Add(Me.PictureBox6)
@@ -360,7 +387,6 @@ Partial Class Form1
         Me.Controls.Add(Me.PictureBox4)
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.DataGridView2)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.ProgressBar1)
@@ -409,7 +435,6 @@ Partial Class Form1
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
-    Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents PictureBox4 As PictureBox
@@ -419,4 +444,7 @@ Partial Class Form1
     Friend WithEvents PictureBox7 As PictureBox
     Friend WithEvents PictureBox8 As PictureBox
     Friend WithEvents ConvertirRANDOMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class

@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\david.albino\\source\\repos\\verope\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|C:\\Users\\david.albino\\source\\repos\\verope\\verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|c:\\users\\david.albino\\source\\repos\\verope\\verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
@@ -11,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|c:\\users\\david.albino\\source\\repos\\verope\\verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|C:\\Users\\david.albino\\source\\repos\\verope\\verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "verope\\Form1.vb",
               "ToolTip": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\Form1.vb",
               "RelativeToolTip": "verope\\Form1.vb",
-              "ViewState": "AQIAADkBAAAAAAAAAAAqwFQBAAAAAAAA",
+              "ViewState": "AQIAAJADAAAAAAAAAAAAAKYDAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2024-05-16T18:58:50.639Z",
               "IsPinned": true,
@@ -64,8 +64,7 @@
               "RelativeToolTip": "verope\\Form2.vb",
               "ViewState": "AQIAAHkBAAAAAAAAAAAhwIQBAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2024-06-10T17:00:08.618Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-10T17:00:08.618Z"
             },
             {
               "$type": "Document",
@@ -76,8 +75,7 @@
               "ToolTip": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\Form2.vb [Dise\u00F1o]",
               "RelativeToolTip": "verope\\Form2.vb [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2024-06-19T15:46:09.128Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2024-06-19T15:46:09.128Z"
             }
           ]
         }

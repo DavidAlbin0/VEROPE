@@ -158,7 +158,6 @@ Public Class Polizas
                 Return valor
             End If
         Else
-
             ' Si el valor tiene un punto, formatearlo con comas para separar miles a partir del tercer dígito antes del punto decimal
             Dim partes As String() = valor.Split(".")
             Dim parteEntera As String = partes(0)
@@ -184,6 +183,7 @@ Public Class Polizas
         End If
     End Function
 
+
     Private Sub dataGridView_RowPostPaint(sender As Object, e As DataGridViewRowPostPaintEventArgs)
         ' Dibujar el número de fila en el encabezado de fila
         Dim grid As DataGridView = CType(sender, DataGridView)
@@ -204,10 +204,11 @@ Public Class Polizas
         e.Graphics.DrawString(rowIdx, grid.Font, SystemBrushes.ControlText, headerBounds, centerFormat)
     End Sub
 
-    ' Método para cargar datos desde un archivo XML en el DataGridView
+    Function FormatearComoContabilidad(valor As Double) As String
+        FormatearComoContabilidad = Format(valor, "Currency")
+    End Function
+
     Private Sub CargarDatosEnDataGridView(filePath As String, dataGridView As DataGridView)
-        ' Limpiar las columnas existentes en el DataGridView antes de cargar los archivos
-        dataGridView.Columns.Clear()
         ' Limpiar las filas existentes en el DataGridView antes de cargar los archivos
         dataGridView.Rows.Clear()
 
@@ -226,27 +227,29 @@ Public Class Polizas
                 ' Obtener la primera tabla del DataSet
                 Dim dataTable As DataTable = dataSet.Tables(0)
 
-                ' Añadir las columnas al DataGridView
-                For Each column As DataColumn In dataTable.Columns
-                    dataGridView.Columns.Add(column.ColumnName, column.ColumnName)
-                Next
-
                 ' Añadir las filas al DataGridView
                 For Each row As DataRow In dataTable.Rows
                     ' Convertir la fila en un array de objetos
-                    Dim rowValues As Object() = row.ItemArray
+                    Dim rowValues As Object() = row.ItemArray.Clone()
 
-                    ' Verificar y formatear el tercer campo si es necesario
-                    If rowValues.Length > 2 Then
-                        rowValues(2) = FormatearComoContabilidad(rowValues(2).ToString())
+                    ' Verificar y formatear las columnas 5, 6 y 7 si es necesario
+                    If rowValues.Length > 6 Then
+                        rowValues(4) = FormatearComoContabilidad(rowValues(4).ToString())
+                        rowValues(5) = FormatearComoContabilidad(rowValues(5).ToString())
+                        rowValues(6) = FormatearComoContabilidad(rowValues(6).ToString())
                     End If
 
                     ' Agregar la fila al DataGridView
-                    dataGridView.Rows.Add(rowValues)
+                    Dim rowIndex As Integer = dataGridView.Rows.Add(rowValues)
+
+                    ' Alinear a la derecha las columnas 5, 6 y 7
+                    dataGridView.Rows(rowIndex).Cells(4).Style.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dataGridView.Rows(rowIndex).Cells(5).Style.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dataGridView.Rows(rowIndex).Cells(6).Style.Alignment = DataGridViewContentAlignment.MiddleRight
                 Next
 
-                ' Ajustar el tamaño de las columnas para que se ajusten al contenido
-                dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+                ' No ajustar el tamaño de las columnas automáticamente
+                ' dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
 
                 ' Manejar el evento RowPostPaint para dibujar los números de fila
                 AddHandler dataGridView.RowPostPaint, AddressOf dataGridView_RowPostPaint

@@ -7,6 +7,8 @@ Imports System.Runtime.InteropServices.ComTypes
 Imports System.Data
 Imports System.Windows.Forms
 Imports System.Xml
+Imports verope.Polizas
+
 
 Public Class Form1
 
@@ -937,6 +939,13 @@ Public Class Form1
     Private Sub HighlightResult()
         DataGridView2.CurrentCell = results(currentIndex)
         DataGridView2.CurrentCell.Selected = True
+    End Sub
+    Private Sub CorrexionPolizasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrexionPolizasToolStripMenuItem.Click
+        ' Crear una instancia de Form2
+        Dim form2 As New Polizas()
+
+        ' Mostrar Form2
+        form2.Show()
     End Sub
 
 

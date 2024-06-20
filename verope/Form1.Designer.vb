@@ -32,7 +32,6 @@ Partial Class Form1
         Me.DepositosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModificarDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CorrexionPolizasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CorregirOperacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConvertirRANDOMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.DirectorySearcher1 = New System.DirectoryServices.DirectorySearcher()
@@ -94,13 +93,13 @@ Partial Class Form1
         'OrigenToolStripMenuItem
         '
         Me.OrigenToolStripMenuItem.Name = "OrigenToolStripMenuItem"
-        Me.OrigenToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.OrigenToolStripMenuItem.Size = New System.Drawing.Size(143, 26)
         Me.OrigenToolStripMenuItem.Text = "Origen"
         '
         'DestinoToolStripMenuItem
         '
         Me.DestinoToolStripMenuItem.Name = "DestinoToolStripMenuItem"
-        Me.DestinoToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.DestinoToolStripMenuItem.Size = New System.Drawing.Size(143, 26)
         Me.DestinoToolStripMenuItem.Text = "Destino"
         '
         'BorrarSaldosToolStripMenuItem
@@ -119,27 +118,20 @@ Partial Class Form1
         'DepositosToolStripMenuItem
         '
         Me.DepositosToolStripMenuItem.Name = "DepositosToolStripMenuItem"
-        Me.DepositosToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.DepositosToolStripMenuItem.Size = New System.Drawing.Size(199, 26)
         Me.DepositosToolStripMenuItem.Text = "Depositos"
         '
         'ModificarDatosToolStripMenuItem
         '
         Me.ModificarDatosToolStripMenuItem.Name = "ModificarDatosToolStripMenuItem"
-        Me.ModificarDatosToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.ModificarDatosToolStripMenuItem.Size = New System.Drawing.Size(199, 26)
         Me.ModificarDatosToolStripMenuItem.Text = "Modificar Datos"
         '
         'CorrexionPolizasToolStripMenuItem
         '
-        Me.CorrexionPolizasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CorregirOperacionesToolStripMenuItem})
         Me.CorrexionPolizasToolStripMenuItem.Name = "CorrexionPolizasToolStripMenuItem"
         Me.CorrexionPolizasToolStripMenuItem.Size = New System.Drawing.Size(143, 24)
         Me.CorrexionPolizasToolStripMenuItem.Text = "Correccion Polizas"
-        '
-        'CorregirOperacionesToolStripMenuItem
-        '
-        Me.CorregirOperacionesToolStripMenuItem.Name = "CorregirOperacionesToolStripMenuItem"
-        Me.CorregirOperacionesToolStripMenuItem.Size = New System.Drawing.Size(233, 26)
-        Me.CorregirOperacionesToolStripMenuItem.Text = "Corregir Operaciones"
         '
         'ConvertirRANDOMToolStripMenuItem
         '
@@ -419,7 +411,6 @@ Partial Class Form1
     Friend WithEvents DestinoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DepositosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ModificarDatosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CorregirOperacionesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents DirectorySearcher1 As DirectoryServices.DirectorySearcher
     Friend WithEvents DirectorySearcher2 As DirectoryServices.DirectorySearcher

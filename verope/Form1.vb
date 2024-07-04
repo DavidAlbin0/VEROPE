@@ -50,12 +50,12 @@ Public Class Form1
         <VBFixedString(12), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=12)> Public others As String
     End Structure
     Public Structure Oper_aciones
-        <VBFixedString(6), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=6)> Public CTA As String
-        <VBFixedString(30), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=30)> Public descr As String
-        <VBFixedString(2), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=2)> Public fe As String
-        <VBFixedString(16), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=16)> Public impte As String
-        <VBFixedString(2), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=2)> Public indenti As String
-        <VBFixedString(8), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=8)> Public real As String
+        <VBFixedString(6), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=6)> Public CTA As String
+        <VBFixedString(30), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=30)> Public descr As String
+        <VBFixedString(2), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=2)> Public fe As String
+        <VBFixedString(16), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=16)> Public impte As String
+        <VBFixedString(2), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=2)> Public indenti As String
+        <VBFixedString(8), System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=8)> Public real As String
     End Structure
 
     Structure CAT_AX
@@ -334,7 +334,7 @@ Public Class Form1
             Dim valorDecimal As Decimal
             If Decimal.TryParse(valor, valorDecimal) Then
                 ' Utilizar el formato con comas
-                Return "$ " & valorDecimal.ToString("#,#0").Replace(".", ",")
+                Return " " & valorDecimal.ToString("#,#0").Replace(".", ",")
             Else
                 ' Si no se puede convertir a decimal, devolver el valor original
                 Return valor
@@ -362,7 +362,7 @@ Public Class Form1
                 End If
             Next
 
-            Return "$" & parteEnteraFormateada & "." & parteDecimal
+            Return "" & parteEnteraFormateada & "." & parteDecimal
         End If
     End Function
 
@@ -383,34 +383,26 @@ Public Class Form1
         dataGridView.RowHeadersVisible = True
 
         Try
-            ' Crear un DataSet para almacenar los datos del archivo XML
-            Dim dataSet As New DataSet()
+            ' Leer todas las líneas del archivo CSV
+            Dim lines As String() = System.IO.File.ReadAllLines(filePath)
 
-            ' Leer el archivo XML en el DataSet
-            dataSet.ReadXml(filePath)
-
-            ' Verificar si el DataSet contiene alguna tabla
-            If dataSet.Tables.Count > 0 Then
-                ' Obtener la primera tabla del DataSet
-                Dim dataTable As DataTable = dataSet.Tables(0)
-
-                ' Añadir las columnas al DataGridView
-                For Each column As DataColumn In dataTable.Columns
-                    dataGridView.Columns.Add(column.ColumnName, column.ColumnName)
+            ' Verificar que el archivo no está vacío
+            If lines.Length > 0 Then
+                ' Separar la primera línea para obtener los encabezados de las columnas
+                Dim headers As String() = lines(0).Split(";"c)
+                For Each header As String In headers
+                    dataGridView.Columns.Add(header, header)
                 Next
 
-                ' Añadir las filas al DataGridView
-                For Each row As DataRow In dataTable.Rows
-                    ' Convertir la fila en un array de objetos
-                    Dim rowValues As Object() = row.ItemArray
-
+                ' Leer las filas restantes del archivo CSV
+                For i As Integer = 1 To lines.Length - 1
+                    Dim fields As String() = lines(i).Split(";"c)
                     ' Verificar y formatear el tercer campo si es necesario
-                    If rowValues.Length > 2 Then
-                        rowValues(2) = FormatearComoContabilidad(rowValues(2).ToString())
+                    If fields.Length > 2 Then
+                        fields(2) = FormatearComoContabilidad(fields(2))
                     End If
-
-                    ' Agregar la fila al DataGridView
-                    dataGridView.Rows.Add(rowValues)
+                    ' Añadir las filas al DataGridView
+                    dataGridView.Rows.Add(fields)
                 Next
 
                 ' Ajustar el tamaño de las columnas para que se ajusten al contenido
@@ -451,51 +443,44 @@ Public Class Form1
         e.Graphics.DrawString(rowIdx, grid.Font, SystemBrushes.ControlText, headerBounds, centerFormat)
     End Sub
 
-    ' Método para guardar los datos del DataGridView en un archivo XML
-    Private Sub GuardarDataGridViewEnXML(dataGridView As DataGridView)
+    ' Método para guardar los datos del DataGridView en un archivo CSV
+    Private Sub GuardarDataGridViewEnCSV(dataGridView As DataGridView)
         Dim saveFileDialog1 As New SaveFileDialog()
-        saveFileDialog1.Filter = "Archivos XML (*.xml)|*.xml|Todos los archivos (*.*)|*.*"
+        saveFileDialog1.Filter = "Archivos CSV (*.csv)|*.csv|Todos los archivos (*.*)|*.*"
         saveFileDialog1.FilterIndex = 1
         saveFileDialog1.RestoreDirectory = True
 
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
             Dim filePath As String = saveFileDialog1.FileName
-            Dim dataSet As New DataSet("DataGridViewData")
-            Dim dataTable As New DataTable("Row")
+            ' Usar StreamWriter para escribir en el archivo CSV
+            Using writer As New System.IO.StreamWriter(filePath)
+                ' Escribir encabezados de columna
+                Dim columnHeaders As String = String.Join(";", dataGridView.Columns.Cast(Of DataGridViewColumn)().Select(Function(column) column.HeaderText))
+                writer.WriteLine(columnHeaders)
 
-            ' Crear las columnas en el DataTable
-            For Each column As DataGridViewColumn In dataGridView.Columns
-                dataTable.Columns.Add(column.Name, GetType(String))
-            Next
-
-            ' Añadir las filas del DataGridView al DataTable
-            For Each row As DataGridViewRow In dataGridView.Rows
-                If Not row.IsNewRow Then
-                    Dim dataRow As DataRow = dataTable.NewRow()
-                    For columnIndex As Integer = 0 To dataGridView.Columns.Count - 1
-                        Dim cellValue As Object = row.Cells(columnIndex).Value
-                        If cellValue IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(cellValue.ToString()) Then
-                            ' Limpiar el valor de la celda para eliminar comas y símbolos de dólar
-                            Dim cleanedValue As String = cellValue.ToString().Replace(",", "").Replace("$", "").Trim()
-                            dataRow(columnIndex) = cleanedValue
-                        Else
-                            dataRow(columnIndex) = DBNull.Value
-                        End If
-                    Next
-                    dataTable.Rows.Add(dataRow)
-                End If
-            Next
-
-            ' Añadir el DataTable al DataSet
-            dataSet.Tables.Add(dataTable)
-
-            ' Guardar el DataSet en un archivo XML
-            dataSet.WriteXml(filePath, XmlWriteMode.WriteSchema)
+                ' Escribir filas del DataGridView
+                For Each row As DataGridViewRow In dataGridView.Rows
+                    If Not row.IsNewRow Then
+                        Dim rowValues As New List(Of String)
+                        For Each cell As DataGridViewCell In row.Cells
+                            If cell.Value IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(cell.Value.ToString()) Then
+                                ' Limpiar el valor de la celda para eliminar comas y símbolos de dólar
+                                Dim cleanedValue As String = cell.Value.ToString().Replace(",", "").Replace("$", "").Trim()
+                                rowValues.Add(cleanedValue)
+                            Else
+                                rowValues.Add(String.Empty)
+                            End If
+                        Next
+                        writer.WriteLine(String.Join(";", rowValues))
+                    End If
+                Next
+            End Using
 
             ' Informar al usuario que el archivo se guardó correctamente
             MessageBox.Show("Archivo guardado exitosamente.", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
         ' Finalizar la edición en DataGridView1 y DataGridView2 para evitar el error
@@ -517,7 +502,7 @@ Public Class Form1
         ' Restaura la ubicación original de la imagen
         PictureBox5.Location = New Point(PictureBox5.Location.X - 2, PictureBox5.Location.Y - 2)
         ' Ejecuta el código para guardar el DataGridView en CSV
-        GuardarDataGridViewEnXML(DataGridView2)
+        GuardarDataGridViewEnCSV(DataGridView2)
     End Sub
 
 
@@ -940,12 +925,50 @@ Public Class Form1
         DataGridView2.CurrentCell = results(currentIndex)
         DataGridView2.CurrentCell.Selected = True
     End Sub
+
+
     Private Sub CorrexionPolizasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrexionPolizasToolStripMenuItem.Click
         ' Crear una instancia de Form2
         Dim form2 As New Polizas()
 
         ' Mostrar Form2
         form2.Show()
+    End Sub
+    ' Método para generar una cadena aleatoria de longitud específica
+    Private Function RandomString(length As Integer) As String
+        Dim rand As New Random()
+        Dim chars As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        Return New String(Enumerable.Repeat(chars, length).Select(Function(s) s(rand.Next(s.Length))).ToArray())
+    End Function
+
+    Private Sub PictureBox9_Click(sender As Object, e As EventArgs) Handles PictureBox9.Click
+        ' Crear una instancia de CAT_MA con valores aleatorios
+        Dim cat As New CAT_MA With {
+        .B1 = RandomString(6),
+        .B2 = RandomString(32),
+        .B3 = RandomString(16),
+        .B4 = RandomString(5),
+        .B5 = RandomString(5)
+    }
+
+        ' Convertir la instancia en un arreglo de bytes
+        Dim size As Integer = Marshal.SizeOf(cat)
+        Dim arr(size - 1) As Byte
+        Dim ptr As IntPtr = Marshal.AllocHGlobal(size)
+        Marshal.StructureToPtr(cat, ptr, True)
+        Marshal.Copy(ptr, arr, 0, size)
+        Marshal.FreeHGlobal(ptr)
+
+        ' Usar SaveFileDialog para que el usuario elija la ubicación del archivo
+        Dim saveFileDialog As New SaveFileDialog()
+        saveFileDialog.Filter = "Data files (*)|*"
+        saveFileDialog.FileName = "CAT_MA"
+
+        If saveFileDialog.ShowDialog() = DialogResult.OK Then
+            Dim filePath As String = saveFileDialog.FileName
+            File.WriteAllBytes(filePath, arr)
+            MessageBox.Show("Archivo guardado exitosamente en " & filePath)
+        End If
     End Sub
 
 

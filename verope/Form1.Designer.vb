@@ -24,13 +24,7 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
-        Me.CambiarAuxiliaresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OrigenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DestinoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BorrarSaldosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BuscarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DepositosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ModificarDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CorrexionPolizasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConvertirRANDOMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
@@ -59,7 +53,6 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.PictureBox9 = New System.Windows.Forms.PictureBox()
         Me.MenuStrip2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,63 +64,24 @@ Partial Class Form1
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip2
         '
         Me.MenuStrip2.BackColor = System.Drawing.Color.White
         Me.MenuStrip2.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarAuxiliaresToolStripMenuItem, Me.BorrarSaldosToolStripMenuItem, Me.BuscarToolStripMenuItem, Me.CorrexionPolizasToolStripMenuItem, Me.ConvertirRANDOMToolStripMenuItem})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BorrarSaldosToolStripMenuItem, Me.CorrexionPolizasToolStripMenuItem, Me.ConvertirRANDOMToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.Size = New System.Drawing.Size(1673, 28)
         Me.MenuStrip2.TabIndex = 1
         Me.MenuStrip2.Text = "MenuStrip2"
         '
-        'CambiarAuxiliaresToolStripMenuItem
-        '
-        Me.CambiarAuxiliaresToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OrigenToolStripMenuItem, Me.DestinoToolStripMenuItem})
-        Me.CambiarAuxiliaresToolStripMenuItem.Name = "CambiarAuxiliaresToolStripMenuItem"
-        Me.CambiarAuxiliaresToolStripMenuItem.Size = New System.Drawing.Size(147, 24)
-        Me.CambiarAuxiliaresToolStripMenuItem.Text = "Cambiar Auxiliares"
-        '
-        'OrigenToolStripMenuItem
-        '
-        Me.OrigenToolStripMenuItem.Name = "OrigenToolStripMenuItem"
-        Me.OrigenToolStripMenuItem.Size = New System.Drawing.Size(143, 26)
-        Me.OrigenToolStripMenuItem.Text = "Origen"
-        '
-        'DestinoToolStripMenuItem
-        '
-        Me.DestinoToolStripMenuItem.Name = "DestinoToolStripMenuItem"
-        Me.DestinoToolStripMenuItem.Size = New System.Drawing.Size(143, 26)
-        Me.DestinoToolStripMenuItem.Text = "Destino"
-        '
         'BorrarSaldosToolStripMenuItem
         '
         Me.BorrarSaldosToolStripMenuItem.Name = "BorrarSaldosToolStripMenuItem"
         Me.BorrarSaldosToolStripMenuItem.Size = New System.Drawing.Size(110, 24)
         Me.BorrarSaldosToolStripMenuItem.Text = "Borrar saldos"
-        '
-        'BuscarToolStripMenuItem
-        '
-        Me.BuscarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DepositosToolStripMenuItem, Me.ModificarDatosToolStripMenuItem})
-        Me.BuscarToolStripMenuItem.Name = "BuscarToolStripMenuItem"
-        Me.BuscarToolStripMenuItem.Size = New System.Drawing.Size(66, 24)
-        Me.BuscarToolStripMenuItem.Text = "Buscar"
-        '
-        'DepositosToolStripMenuItem
-        '
-        Me.DepositosToolStripMenuItem.Name = "DepositosToolStripMenuItem"
-        Me.DepositosToolStripMenuItem.Size = New System.Drawing.Size(199, 26)
-        Me.DepositosToolStripMenuItem.Text = "Depositos"
-        '
-        'ModificarDatosToolStripMenuItem
-        '
-        Me.ModificarDatosToolStripMenuItem.Name = "ModificarDatosToolStripMenuItem"
-        Me.ModificarDatosToolStripMenuItem.Size = New System.Drawing.Size(199, 26)
-        Me.ModificarDatosToolStripMenuItem.Text = "Modificar Datos"
         '
         'CorrexionPolizasToolStripMenuItem
         '
@@ -257,7 +211,7 @@ Partial Class Form1
         'PictureBox2
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.BackgroundImage = Global.verope.My.Resources.Resources.copiars_25x251
+        Me.PictureBox2.BackgroundImage = CType(resources.GetObject("PictureBox2.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox2.Location = New System.Drawing.Point(959, 75)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(33, 31)
@@ -267,7 +221,7 @@ Partial Class Form1
         'PictureBox3
         '
         Me.PictureBox3.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox3.BackgroundImage = Global.verope.My.Resources.Resources.Borrar_25x25
+        Me.PictureBox3.BackgroundImage = CType(resources.GetObject("PictureBox3.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox3.Location = New System.Drawing.Point(57, 75)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(31, 31)
@@ -277,7 +231,7 @@ Partial Class Form1
         'PictureBox4
         '
         Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox4.BackgroundImage = Global.verope.My.Resources.Resources.Borrar_25x25
+        Me.PictureBox4.BackgroundImage = CType(resources.GetObject("PictureBox4.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox4.Location = New System.Drawing.Point(922, 75)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(31, 31)
@@ -287,7 +241,7 @@ Partial Class Form1
         'PictureBox5
         '
         Me.PictureBox5.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox5.BackgroundImage = Global.verope.My.Resources.Resources.guardar_25x25
+        Me.PictureBox5.BackgroundImage = CType(resources.GetObject("PictureBox5.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox5.Location = New System.Drawing.Point(885, 75)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(31, 31)
@@ -297,7 +251,7 @@ Partial Class Form1
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.BackgroundImage = Global.verope.My.Resources.Resources.copiars_25x25
+        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(92, 75)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(33, 31)
@@ -307,7 +261,7 @@ Partial Class Form1
         'PictureBox6
         '
         Me.PictureBox6.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox6.BackgroundImage = Global.verope.My.Resources.Resources.subirarechivo_25x25
+        Me.PictureBox6.BackgroundImage = CType(resources.GetObject("PictureBox6.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox6.Location = New System.Drawing.Point(20, 75)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(31, 31)
@@ -317,7 +271,7 @@ Partial Class Form1
         'PictureBox7
         '
         Me.PictureBox7.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox7.BackgroundImage = Global.verope.My.Resources.Resources.subirarechivo_25x25
+        Me.PictureBox7.BackgroundImage = CType(resources.GetObject("PictureBox7.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox7.Location = New System.Drawing.Point(848, 75)
         Me.PictureBox7.Name = "PictureBox7"
         Me.PictureBox7.Size = New System.Drawing.Size(31, 31)
@@ -327,7 +281,7 @@ Partial Class Form1
         'PictureBox8
         '
         Me.PictureBox8.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox8.BackgroundImage = Global.verope.My.Resources.Resources.impresora_50X50
+        Me.PictureBox8.BackgroundImage = CType(resources.GetObject("PictureBox8.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox8.Location = New System.Drawing.Point(1590, 46)
         Me.PictureBox8.Name = "PictureBox8"
         Me.PictureBox8.Size = New System.Drawing.Size(63, 60)
@@ -363,24 +317,13 @@ Partial Class Form1
         Me.Button2.Text = "Siguiente"
         Me.Button2.UseVisualStyleBackColor = False
         '
-        'PictureBox9
-        '
-        Me.PictureBox9.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox9.BackgroundImage = Global.verope.My.Resources.Resources.guardar_25x25
-        Me.PictureBox9.Location = New System.Drawing.Point(708, 75)
-        Me.PictureBox9.Name = "PictureBox9"
-        Me.PictureBox9.Size = New System.Drawing.Size(31, 31)
-        Me.PictureBox9.TabIndex = 21
-        Me.PictureBox9.TabStop = False
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Menu
-        Me.BackgroundImage = Global.verope.My.Resources.Resources.llp
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(1673, 902)
-        Me.Controls.Add(Me.PictureBox9)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TextBox1)
@@ -411,20 +354,13 @@ Partial Class Form1
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents MenuStrip2 As MenuStrip
-    Friend WithEvents CambiarAuxiliaresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BorrarSaldosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BuscarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CorrexionPolizasToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OrigenToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DestinoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DepositosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ModificarDatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents DirectorySearcher1 As DirectoryServices.DirectorySearcher
     Friend WithEvents DirectorySearcher2 As DirectoryServices.DirectorySearcher
@@ -452,5 +388,4 @@ Partial Class Form1
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
-    Friend WithEvents PictureBox9 As PictureBox
 End Class

@@ -47,7 +47,7 @@ Public Class Polizas
     End Sub
 
 
-    Private Sub SubirPolizaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubirPolizaToolStripMenuItem.Click
+    Private Sub SubirPolizaToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Dim openFileDialog As New OpenFileDialog()
         openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*"
         openFileDialog.Title = "Seleccione el archivo de pólizas"

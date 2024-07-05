@@ -941,7 +941,7 @@ Public Class Form1
         Return New String(Enumerable.Repeat(chars, length).Select(Function(s) s(rand.Next(s.Length))).ToArray())
     End Function
 
-    Private Sub PictureBox9_Click(sender As Object, e As EventArgs) Handles PictureBox9.Click
+    Private Sub PictureBox9_Click(sender As Object, e As EventArgs)
         ' Crear una instancia de CAT_MA con valores aleatorios
         Dim cat As New CAT_MA With {
         .B1 = RandomString(6),

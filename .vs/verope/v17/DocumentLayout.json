@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\david.albino\\source\\repos\\verope\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|c:\\users\\david.albino\\source\\repos\\verope\\verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|C:\\Users\\david.albino\\source\\repos\\verope\\verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|C:\\Users\\david.albino\\source\\repos\\verope\\verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|c:\\users\\david.albino\\source\\repos\\verope\\verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|C:\\Users\\david.albino\\source\\repos\\verope\\verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
       "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|C:\\Users\\david.albino\\source\\repos\\verope\\verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+      "AbsoluteMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|C:\\Users\\david.albino\\source\\repos\\verope\\verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{61EEB8A7-2A17-4273-91F4-77B8CA41AEC9}|verope\\verope.vbproj|solutionrelative:verope\\form2.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "verope\\Form1.vb",
               "ToolTip": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\Form1.vb",
               "RelativeToolTip": "verope\\Form1.vb",
-              "ViewState": "AQIAAKADAAAAAAAAAAAAALMDAAAUAAAA",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwBgAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2024-05-16T18:58:50.639Z",
               "IsPinned": true,
@@ -56,20 +56,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Form2.vb",
               "DocumentMoniker": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\Form2.vb",
               "RelativeDocumentMoniker": "verope\\Form2.vb",
               "ToolTip": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\Form2.vb",
               "RelativeToolTip": "verope\\Form2.vb",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIQBAAAsAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2024-06-10T17:00:08.618Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Form2.vb [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\david.albino\\source\\repos\\verope\\verope\\Form2.vb",
               "RelativeDocumentMoniker": "verope\\Form2.vb",
